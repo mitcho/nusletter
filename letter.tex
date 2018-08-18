@@ -1,0 +1,40 @@
+\documentclass[a4paper]{article}
+
+\usepackage{nusletter}
+
+\usepackage{lipsum}
+
+\begin{document}
+
+\nushead{\textbf{Faculty of Arts and Social Sciences}\\
+\small Department of English Language \& Literature}
+
+\nusfoot{Block AS5, 7 Arts Link, Singapore 117570\\
+Tel: (65) 6516 3914 / 3915 / 3917 \hskip 5pt Fax: (65) 6773 2981\\
+Website: www.fas.nus.edu.sg/ell}
+
+\pagestyle{empty}
+
+\noindent\today
+
+\
+
+\noindent Dear fellow NUS staff,
+
+The \verb`nusletter` \LaTeX{} package generates a first page which resembles NUS letterhead. To use, add \verb`\usepackage{nusletter}` to your preamble. If you prefer a blue header, add the package option \verb`blue`. Use the \verb`\nushead{}` and \verb`\nusfoot{}` commands in your document body, right after \verb`\begin{document}`, to add text to the header and footer. (The Source Sans Pro font is used for this purpose, as the official Frutiger font is not freely available.)
+
+\lipsum
+
+\lipsum
+
+\lipsum
+
+\hspace*{3.5in}\begin{minipage}{3in}
+\-\\Sincerely,\\
+\\
+Michael Yoshitaka Erlewine (mitcho)\\
+Assistant Professor, NUS\\
+\texttt{mitcho@nus.edu.sg}
+\end{minipage}
+
+\end{document}

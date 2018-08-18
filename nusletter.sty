@@ -1,0 +1,73 @@
+\ProvidesPackage{nusletter}[NUS letterhead]
+% Michael Yoshitaka Erlewine (mitcho), mitcho@nus.edu.sg
+% Dedicated to the public domain, 2018
+
+\RequirePackage{kvoptions,etoolbox}
+\SetupKeyvalOptions{prefix=nusletter@}
+\DeclareBoolOption{blue}
+\ProcessKeyvalOptions*
+
+% font for 
+\RequirePackage{sourcesanspro}
+% just set \sfdefault locally
+
+\RequirePackage{afterpage}
+\RequirePackage{geometry}
+\geometry{margin=25mm}
+
+% positioning
+\RequirePackage{calc}
+\RequirePackage[absolute]{textpos}
+
+% graphics
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\definecolor{nusblue}{HTML}{163C78} % Pantone 294U
+\definecolor{nusorange}{HTML}{f07d08} % Pantone 152U
+
+\AtBeginDocument{
+
+	% color block
+	\begin{textblock*}{\paperwidth}(0mm,0mm)
+	\ifbool{nusletter@blue}{%
+		\noindent\textcolor{nusblue}{\rule{\paperwidth}{25mm}}%
+	}{%
+		\noindent\textcolor{nusorange}{\rule{\paperwidth}{25mm}}%
+	}
+	\end{textblock*}
+
+	% logo
+	\begin{textblock*}{33mm}(\paperwidth - 33mm - 10mm,6mm)
+	\ifbool{nusletter@blue}{%
+		\noindent\includegraphics[width=33mm]{logo-blue-trim}%
+	}{%
+		\noindent\includegraphics[width=33mm]{logo-orange-trim}%
+	}	
+	\end{textblock*}
+
+	% first page geometry
+	\enlargethispage{-10mm}
+	\vspace*{5mm}
+}
+
+\newcommand{\nushead}[1]{
+	\renewcommand{\sfdefault}{SourceSansPro-LF}
+	\begin{textblock*}{\paperwidth - 50mm}(25mm,6mm)
+	\begingroup
+		\color{white}\sffamily
+		\parindent=0pt
+		#1
+		\endgroup
+	\end{textblock*}
+}
+
+\newcommand{\nusfoot}[1]{
+	\renewcommand{\sfdefault}{SourceSansPro-LF}
+	\begin{textblock*}{\paperwidth - 50mm}(25mm, \paperheight - 25mm)
+	\begingroup
+		\color{nusblue}\footnotesize\sffamily
+		\parindent=0pt
+		#1
+		\endgroup
+	\end{textblock*}
+}
