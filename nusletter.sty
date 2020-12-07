@@ -51,10 +51,14 @@
 }
 
 \newcommand{\nushead}[1]{
-	\renewcommand{\sfdefault}{SourceSansPro-LF}
 	\begin{textblock*}{\paperwidth - 50mm}(25mm,6mm)
 	\begingroup
-		\color{white}\sffamily
+		\color{white}%
+		\ifxetex%
+			\sourcesanspro%
+		\else%
+			\renewcommand{\sfdefault}{SourceSansPro-LF}\sffamily%
+		\fi%
 		\parindent=0pt
 		#1
 		\endgroup
@@ -62,10 +66,14 @@
 }
 
 \newcommand{\nusfoot}[1]{
-	\renewcommand{\sfdefault}{SourceSansPro-LF}
 	\begin{textblock*}{\paperwidth - 50mm}(25mm, \paperheight - 25mm)
 	\begingroup
-		\color{nusblue}\footnotesize\sffamily
+		\color{nusblue}\footnotesize%
+		\ifxetex%
+			\sourcesanspro%
+		\else%
+			\renewcommand{\sfdefault}{SourceSansPro-LF}\sffamily%
+		\fi%
 		\parindent=0pt
 		#1
 		\endgroup
