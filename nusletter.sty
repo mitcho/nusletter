@@ -1,10 +1,11 @@
 \ProvidesPackage{nusletter}[NUS letterhead]
 % Michael Yoshitaka Erlewine (mitcho), mitcho@nus.edu.sg
-% Dedicated to the public domain, 2018
+% Dedicated to the public domain, 2018--2023
 
 \RequirePackage{kvoptions,etoolbox}
 \SetupKeyvalOptions{prefix=nusletter@}
 \DeclareBoolOption{blue}
+\DeclareBoolOption{black}
 \ProcessKeyvalOptions*
 
 % font for 
@@ -28,20 +29,26 @@
 \AtBeginDocument{
 
 	% color block
-	\begin{textblock*}{\paperwidth}(0mm,0mm)
-	\ifbool{nusletter@blue}{%
-		\noindent\textcolor{nusblue}{\rule{\paperwidth}{25mm}}%
-	}{%
-		\noindent\textcolor{nusorange}{\rule{\paperwidth}{25mm}}%
-	}
-	\end{textblock*}
+	\notbool{nusletter@black}{% only if not black
+		\begin{textblock*}{\paperwidth}(0mm,0mm)
+		\ifbool{nusletter@blue}{%
+			\noindent\textcolor{nusblue}{\rule{\paperwidth}{25mm}}%
+		}{%
+			\noindent\textcolor{nusorange}{\rule{\paperwidth}{25mm}}%
+		}
+		\end{textblock*}
+	}{}
 
 	% logo
 	\begin{textblock*}{33mm}(\paperwidth - 33mm - 10mm,6mm)
 	\ifbool{nusletter@blue}{%
 		\noindent\includegraphics[width=33mm]{logo-blue-trim}%
 	}{%
+		\ifbool{nusletter@black}{%
+		\noindent\includegraphics[width=33mm]{logo-black-trim}%
+		}{
 		\noindent\includegraphics[width=33mm]{logo-orange-trim}%
+		}
 	}	
 	\end{textblock*}
 
@@ -53,7 +60,7 @@
 \newcommand{\nushead}[1]{
 	\begin{textblock*}{\paperwidth - 50mm}(25mm,6mm)
 	\begingroup
-		\color{white}%
+		\notbool{nusletter@black}{\color{white}}{}%
 		\ifxetex%
 			\sourcesanspro%
 		\else%
@@ -68,7 +75,7 @@
 \newcommand{\nusfoot}[1]{
 	\begin{textblock*}{\paperwidth - 50mm}(25mm, \paperheight - 25mm)
 	\begingroup
-		\color{nusblue}\footnotesize%
+		\notbool{nusletter@black}{\color{nusblue}}{}\footnotesize%
 		\ifxetex%
 			\sourcesanspro%
 		\else%
